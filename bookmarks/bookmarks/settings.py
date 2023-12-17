@@ -132,3 +132,5 @@ LOGIN_REDIRECT_URL = 'dashboard'  # URL-адрес, на который след
 LOGIN_URL = 'login'  # URL-адрес, на который следует перенаправлять пользователя, чтобы зарегистрировать его вход
 # (например, представления, в которых используется декоратор login_required).
 LOGOUT_URL = 'logout'  # URL-адрес, на который следует перенаправлять пользователя, чтобы зарегистрировать его выход.
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
