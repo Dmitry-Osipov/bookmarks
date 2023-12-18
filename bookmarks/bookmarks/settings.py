@@ -134,3 +134,6 @@ LOGIN_URL = 'login'  # URL-адрес, на который следует пер
 LOGOUT_URL = 'logout'  # URL-адрес, на который следует перенаправлять пользователя, чтобы зарегистрировать его выход.
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'

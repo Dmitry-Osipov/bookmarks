@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 
+from .models import Profile
+
 
 class LoginForm(forms.Form):
     """
@@ -35,3 +37,27 @@ class UserRegistrationForm(forms.ModelForm):
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Passwords don\'t match.')
         return cd['password2']
+
+
+class UserEditForm(forms.ModelForm):
+    """
+    Класс позволяет редактировать своё имя, фамилию и адрес электронной почты, которые являются атрибутами модели User.
+    """
+    class Meta:
+        """
+        Вложенный класс предназначен для корректной обработки данных.
+        """
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+
+
+class ProfileEditForm(forms.ModelForm):
+    """
+    Класс позволяет редактировать дату рождения и фото, которые являются атрибутами модели Profile.
+    """
+    class Meta:
+        """
+        Вложенный класс предназначен для корректной обработки данных.
+        """
+        model = Profile
+        fields = ('date_of_birth', 'photo')
