@@ -157,3 +157,15 @@ SOCIAL_AUTH_TWITTER_SECRET = 'djiquw8JAJQKLLN8u932JHGVGdssd82JG21wfs2'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1012815342089-75nc1o30qhoadjqbsg04s3gr9jsa0n3q.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '920191dshjdJ21r43'
+
+SOCIAL_AUTH_PIPELINE = [
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'account.authentication.create_profile',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+]
