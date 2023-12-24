@@ -1,8 +1,9 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render
-from django.contrib import messages
 
 from .forms import *
 from .models import Profile
@@ -88,3 +89,29 @@ def edit(request):
 
     return render(request, 'account/edit.html',
                   context={'user_form': user_form, 'profile_form': profile_form})
+
+
+@login_required
+def user_list(request):
+    """
+    Функция представления выводит всех активных пользователей.
+
+    :param request: Запрос клиента.
+    :return: HTML-шаблон представления списка активных пользователей.
+    """
+    users = User.objects.filter(is_active=True)
+    return render(request, 'account/user/list.html', context={'section': 'people', 'users': users})
+
+
+@login_required
+def user_detail(request, username):
+    """
+    Функция представления выводит детальную информацию о конкретном активном пользователе по его логину.
+
+    :param request: Запрос клиента.
+    :param username: Логин пользователя.
+    :return: HTML-шаблон представления конкретного пользователя.
+    :raises Http404: Ошибка 404, если пользователь неактивен или не существует.
+    """
+    user = get_object_or_404(User, username=username, is_active=True)
+    return render(request, 'account/user/detail.html', context={'section': 'people', 'user': user})
